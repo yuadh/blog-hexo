@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Vuex | 圆明园园长</title><meta name="author" content="yuadh"><meta name="copyright" content="yuadh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="uex是一个专门为Vue.js&#96; 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种 可预测的方式发送变化 Vuex 采用集中式管理组件依赖的共享数据的一个工具，可以解决不同组件之间数据共享问题  state：存储共享状态数据 mutaitions  ：修改 state 里的数据，但是只能修改同步代码，不能修改异步 actions：可以修改异">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex">
+<meta property="og:url" content="https://www.yuadh.com/pages/5e73b2/index.html">
+<meta property="og:site_name" content="圆明园园长">
+<meta property="og:description" content="uex是一个专门为Vue.js&#96; 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种 可预测的方式发送变化 Vuex 采用集中式管理组件依赖的共享数据的一个工具，可以解决不同组件之间数据共享问题  state：存储共享状态数据 mutaitions  ：修改 state 里的数据，但是只能修改同步代码，不能修改异步 actions：可以修改异">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png">
+<meta property="article:published_time" content="2022-03-18T08:32:38.000Z">
+<meta property="article:modified_time" content="2023-02-16T14:04:29.545Z">
+<meta property="article:author" content="yuadh">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.yuadh.com/pages/5e73b2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vuex',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-16 22:04:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="圆明园园长"><span class="site-name">圆明园园长</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vuex</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-18T08:32:38.000Z" title="发表于 2022-03-18 16:32:38">2022-03-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-16T14:04:29.545Z" title="更新于 2023-02-16 22:04:29">2023-02-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vuex"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>uex<code>是一个专门为</code>Vue.js&#96; 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种 可预测的方式发送变化</p>
+<p><code>Vuex</code> 采用集中式管理组件依赖的共享数据的一个工具，可以解决不同组件之间数据共享问题</p>
+<ul>
+<li><code>state</code>：存储共享状态数据</li>
+<li><code>mutaitions</code>  ：修改 <code>state</code> 里的数据，但是只能修改同步代码，不能修改异步</li>
+<li><code>actions</code>：可以修改异步代码 , 将修改的异步代码传给 <code>Mutaitions</code></li>
+</ul>
+<p><img src="https://code.yuadh.com/doc-img/vuex.png"></p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		count:0//存储的数据</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) // 实例化对象</span><br><span class="line">//挂载到vue实例</span><br><span class="line">new Vue(&#123;</span><br><span class="line">	render:h=&gt;h(app),</span><br><span class="line">	store</span><br><span class="line">&#125;).$mount(&#x27;#app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="state"><a href="#state" class="headerlink" title="state"></a><code>state</code></h3><p><strong>获取方式1</strong> : 原始获取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;$store.state.count&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此获取可以使用计算属性，来简便获取 <code>store</code> 存储的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">	count()&#123;</span><br><span class="line">		return this.$store.state.count</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取方式2</strong>：辅助函数获取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//导入 mapState</span><br><span class="line">import &#123;mapState&#125; from &#x27;vuex&#x27;</span><br><span class="line">//引入state属性</span><br><span class="line">mapState([&#x27;count&#x27;]) </span><br><span class="line">//延展运算符导出到计算属性</span><br><span class="line">computed:&#123;</span><br><span class="line">	...mapState([&#x27;count&#x27;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="mutations"><a href="#mutations" class="headerlink" title="mutations"></a><code>mutations</code></h3><p>修改方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">state</span>:&#123;</span><br><span class="line">		<span class="attr">count</span>:<span class="number">0</span><span class="comment">//存储的数据</span></span><br><span class="line">	&#125;,</span><br><span class="line">    <span class="attr">mutations</span>:&#123;</span><br><span class="line">        <span class="comment">//每一个mutation方法都有对应的参数</span></span><br><span class="line">        <span class="comment">//payload 载荷 提交 mutation的方法 传递的参数 它可以是任意形式的</span></span><br><span class="line">        <span class="title function_">addCount</span>(<span class="params">state,payload</span>)&#123;</span><br><span class="line">            state.<span class="property">count</span> +=payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;) <span class="comment">// 实例化对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>修改方法1：</strong>原始修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	test()&#123;</span><br><span class="line">		//第二个参数是要传递的载荷 payload</span><br><span class="line">		this.$store.commit(&#x27;addCount&#x27;,1)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改方法2：</strong> 辅助函数获取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123;mapMutations&#125; from &#x27;vuex&#x27;</span><br><span class="line">methods:&#123;</span><br><span class="line">	...mapMutations([&#x27;addCont&#x27;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="actions"><a href="#actions" class="headerlink" title="actions"></a><code>actions</code></h3><p>修改方法 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">state</span>:&#123;</span><br><span class="line">		<span class="attr">count</span>:<span class="number">0</span><span class="comment">//存储的数据</span></span><br><span class="line">	&#125;,</span><br><span class="line">    <span class="attr">mutations</span>:&#123;</span><br><span class="line">        <span class="comment">//每一个mutation方法都有对应的参数</span></span><br><span class="line">        <span class="comment">//payload 载荷 提交 mutation的方法 传递的参数 它可以是任意形式的</span></span><br><span class="line">        <span class="title function_">addCount</span>(<span class="params">state,payload</span>)&#123;</span><br><span class="line">            state.<span class="property">count</span> +=payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">actions</span>:&#123;</span><br><span class="line">        <span class="title function_">getAsyncCounf</span>(<span class="params">context,params</span>)&#123;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                context.<span class="title function_">commit</span>(<span class="string">&quot;addCount&quot;</span>,params)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;) <span class="comment">// 实例化对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>修改方法1</strong>：原始形式 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div @click=&quot;getAsyncCount&quot;&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/div&gt;</span><br><span class="line">test()&#123;</span><br><span class="line">	this.$store.dispatch(&#x27;getAsyncCont&#x27;,111)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改方法2</strong>： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123;mapActions&#125; from &#x27;vuex&#x27;</span><br><span class="line">&lt;div @click=&quot;getAsyncCount(111)&quot;&gt;</span><br><span class="line">methods:&#123;</span><br><span class="line">	...mapActions([&#x27;getAsyncCont&#x27;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="getters"><a href="#getters" class="headerlink" title="getters"></a><code>getters</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		count:0//存储的数据</span><br><span class="line">		list:[1,2,3,4,5,6,7,8,9]</span><br><span class="line">	&#125;,</span><br><span class="line">    /...</span><br><span class="line">&#125;) // 实例化对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>定义getters</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		count:0//存储的数据</span><br><span class="line">		list:[1,2,3,4,5,6,7,8,9]</span><br><span class="line">	&#125;,</span><br><span class="line">	getters:&#123;</span><br><span class="line">		filterList: state=&gt;state.list.filter(item=&gt;imte&gt;5)</span><br><span class="line">	&#125;</span><br><span class="line">    //...</span><br><span class="line">&#125;) // 实例化对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方式1</strong>：原始使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;&#123;$store.getters.filterList&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方式2</strong>：辅助函数 mapGetters</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123;mapGetters&#125; from &#x27;vuex&#x27;</span><br><span class="line">computed:&#123;</span><br><span class="line">	...mapGetters([&#x27;filterList&#x27;])</span><br><span class="line">&#125;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;&#123;filterList&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vuex模块化"><a href="#vuex模块化" class="headerlink" title="vuex模块化"></a><code>vuex</code>模块化</h2><p>方便管理，避免臃肿</p>
+<h3 id="模块化的基本使用"><a href="#模块化的基本使用" class="headerlink" title="模块化的基本使用"></a>模块化的基本使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		count:0//存储的数据</span><br><span class="line">		list:[1,2,3,4,5,6,7,8,9]</span><br><span class="line">	&#125;,</span><br><span class="line">	getters:&#123;</span><br><span class="line">		filterList: state=&gt;state.list.filter(item=&gt;imte&gt;5)</span><br><span class="line">	&#125;</span><br><span class="line">    //...</span><br><span class="line">	modules:&#123;</span><br><span class="line">		//子模块代码</span><br><span class="line">		user:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				token:&#x27;123&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		setting:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				token:&#x27;Vuex实例&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) // 实例化对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方式1</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;&#123;$store.state.user.token&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用方式2：</strong> 使用 <code>getters</code> 属性和辅助函数的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		count:0//存储的数据</span><br><span class="line">		list:[1,2,3,4,5,6,7,8,9]</span><br><span class="line">	&#125;,</span><br><span class="line">	getters:&#123;</span><br><span class="line">		filterList: state=&gt;state.list.filter(item=&gt;imte&gt;5)</span><br><span class="line">		token:state=&gt;state.user.token,</span><br><span class="line">		name: state=&gt;state.setting.name</span><br><span class="line">	&#125;</span><br><span class="line">    //...</span><br><span class="line">	modules:&#123;</span><br><span class="line">		//子模块代码</span><br><span class="line">		user:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				token:&#x27;123&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		setting:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				name:&#x27;Vuex实例&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) // 实例化对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123;mapGetters&#125; form &#x27;vuex&#x27;</span><br><span class="line">computed:&#123;</span><br><span class="line">	...mapGetters([&#x27;token&#x27;,&#x27;name&#x27;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>默认情况下，模块内部的 <code>action</code> <code>mutaton</code> <code>getter</code> 模块是注册在全局命名空间的</p>
+<p>这样使得多个模块能够对同一个 <code>mutation</code> 或 <code>action</code> 做出响应</p>
+<p><strong>如果想保证子模块内部的封闭性，可以通过命名空间 <code>namespaced</code> 设置</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="comment">//子模块代码</span></span><br><span class="line">		<span class="attr">user</span>:&#123;</span><br><span class="line">            <span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">			<span class="attr">state</span>:&#123;</span><br><span class="line">				<span class="attr">token</span>:<span class="string">&#x27;123&#x27;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">mutations</span>:&#123;</span><br><span class="line">				<span class="title function_">updataToken</span>(<span class="params">state</span>)&#123;</span><br><span class="line">					state.<span class="property">token</span> = <span class="string">&#x27;111&#x27;</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setting</span>:&#123;</span><br><span class="line">			<span class="attr">state</span>:&#123;</span><br><span class="line">				<span class="attr">name</span>:<span class="string">&#x27;Vuex实例&#x27;</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) <span class="comment">// 实例化对象</span></span><br></pre></td></tr></table></figure>
+
+<p>通过命名空间的子模块不能直接被调用，如果要调用需要加上路径名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.commit(&#x27;user/UpdateToken&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方法1</strong> ：普通使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    //...</span><br><span class="line">	modules:&#123;</span><br><span class="line">		//子模块代码</span><br><span class="line">		user:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				token:&#x27;123&#x27;</span><br><span class="line">			&#125;,</span><br><span class="line">			mutations:&#123;</span><br><span class="line">				updataToken(state)&#123;</span><br><span class="line">					state.token = &#x27;111&#x27;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		setting:&#123;</span><br><span class="line">			state:&#123;</span><br><span class="line">				name:&#x27;Vuex实例&#x27;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) // 实例化对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line">	updateToken()&#123;</span><br><span class="line">		this.$store.commit(&#x27;updateToken&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方式2：</strong> 辅助函数</p>
+<p><code>mapMutations</code> </p>
+<p>使用了命名空间的模块，直接使用辅助函数可能会报错</p>
+<p><strong>使用</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">methods</span>:&#123;</span><br><span class="line">	...<span class="title function_">mapMutations</span>([<span class="string">&#x27;user/updateToken&#x27;</span>])</span><br><span class="line">	<span class="title function_">test</span>(<span class="params"></span>)&#123;</span><br><span class="line"> 		<span class="variable language_">this</span>[<span class="string">&#x27;user/updateToken&#x27;</span>]()       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用方式3：</strong> 命名空间辅助函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createNamespaceHelpers&#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">const</span> &#123;mapMutations&#125; = <span class="title function_">createNamespaceHelpers</span>(<span class="string">&#x27;user&#x27;</span>)<span class="comment">//子模块</span></span><br><span class="line"><span class="attr">methods</span>:&#123;</span><br><span class="line">    ...<span class="title function_">mapMutations</span>([<span class="string">&#x27;updateToken&#x27;</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p><code>基地址:http://toutiao.itheima.net</code></p>
+<p>对头条案例，使用 <code>vuex</code> 进行封装</p>
+<p>案例中 <code>vuex </code> 的使用写成独立的模块</p>
+<p><code>store/index.js</code></p>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a><code>index.js</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> categtory <span class="keyword">from</span> <span class="string">&#x27;./modules/catagtory&#x27;</span></span><br><span class="line"><span class="keyword">import</span> newlist <span class="keyword">from</span> <span class="string">&#x27;./modules/newlist&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">    <span class="attr">state</span>:&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mutations</span>:&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">actons</span>:&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">modules</span>:&#123;</span><br><span class="line">        catagroy,</span><br><span class="line">        newlist</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">getters</span>:&#123;</span><br><span class="line">        <span class="attr">catagtory</span>:<span class="function"><span class="params">state</span>=&gt;</span>state.<span class="property">catagtory</span>.<span class="property">catagtory</span>,</span><br><span class="line">        <span class="attr">currentCatagtory</span>:<span class="function"><span class="params">state</span>=&gt;</span>state.<span class="property">catagtory</span>.<span class="property">currentCatagtory</span></span><br><span class="line">    	<span class="attr">currentList</span>:<span class="function"><span class="params">state</span>=&gt;</span>state.<span class="property">newlist</span>.<span class="property">allData</span>[state.<span class="property">catagtory</span>.<span class="property">currentCatagtory</span>]||[]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="catagtory-js"><a href="#catagtory-js" class="headerlink" title="catagtory.js"></a><code>catagtory.js</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">    <span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">state</span>:&#123;</span><br><span class="line">        <span class="attr">catagtory</span>:[],</span><br><span class="line">        <span class="attr">currentCatagtory</span>:<span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mutations</span>:&#123;</span><br><span class="line">        <span class="title function_">updateCatagtory</span>(<span class="params">state,payload</span>)&#123;</span><br><span class="line">            state.<span class="property">catagtory</span> = payload</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">updateCurrentCatagtory</span>(<span class="params">state,payload</span>)&#123;</span><br><span class="line">            state.<span class="property">crrentCatatory</span> = payload</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">actions</span>:&#123;</span><br><span class="line">        <span class="keyword">async</span> <span class="title function_">getCatagtory</span>(<span class="params">context</span>)&#123;</span><br><span class="line">        	<span class="keyword">const</span> &#123;<span class="attr">data</span>:&#123;<span class="attr">data</span>:&#123;channels&#125;&#125;= <span class="keyword">await</span> axios.<span class="title function_">get</span>(<span class="string">&#x27;urlAPI&#x27;</span>)</span><br><span class="line">        	context.<span class="title function_">commit</span>(<span class="string">&#x27;updataCatagtory&#x27;</span>,channels)</span><br><span class="line">            context.<span class="title function_">commit</span>(<span class="string">&#x27;updataCurrentCatagtory&#x27;</span>,channels[<span class="number">0</span>].<span class="property">id</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="catagtory-vue"><a href="#catagtory-vue" class="headerlink" title="catagtory.vue"></a><code>catagtory.vue</code></h3><p><code>catagtory.vue</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;catagtory&quot;&gt;</span><br><span class="line">	&lt;li </span><br><span class="line">	@click=&#x27;$store.commit(&quot;catagtory/updateCurrentCatagtory&quot;,item.id)&#x27;</span><br><span class="line">	:class=&quot;&#123;select:item.id===currentCatagtory&#125;&quot;</span><br><span class="line">	v-for= &quot;item in catagtory&quot; :key=&quot;item.id&quot;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">//...调用</span><br><span class="line">computed:&#123;</span><br><span class="line">	...mapGetters([&#x27;catatory&#x27;,&#x27;currentCatagtory&#x27;])</span><br><span class="line">&#125;,</span><br><span class="line">created()&#123;</span><br><span class="line">	//vue实例创建之后请求获取到数据</span><br><span class="line">	this.$store.dispatch(&#x27;catagtory/getCatagtory&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="newlist-js"><a href="#newlist-js" class="headerlink" title="newlist.js"></a><code>newlist.js</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">    <span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">state</span>:&#123;</span><br><span class="line">       <span class="attr">allData</span>:&#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mutations</span>:&#123;</span><br><span class="line">        <span class="title function_">updataList</span>(<span class="params">state,&#123;currentCatagtory,list&#125;</span>)&#123;</span><br><span class="line">        <span class="comment">//因为组件需要变动才会被通知，所以仅是值的变化无法通知组件也就刷新不来数据</span></span><br><span class="line">			state.<span class="property">allData</span> = &#123;...state.<span class="property">allData</span>,[currentCatagtory]:list&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">actions</span>:&#123;</span><br><span class="line">        <span class="keyword">async</span> <span class="title function_">getNewList</span>(<span class="params">context,cataId</span>)&#123;</span><br><span class="line">        	<span class="keyword">const</span> &#123;<span class="attr">data</span>:&#123;<span class="attr">data</span>:&#123;results&#125;&#125;&#125; = <span class="keyword">await</span> axios.<span class="title function_">get</span>(<span class="string">&#x27;urlapi&#x27;</span>)</span><br><span class="line">            context.<span class="title function_">commit</span>(<span class="string">&#x27;updataList&#x27;</span>,&#123;<span class="attr">currentCatagtory</span>:cataId</span><br><span class="line">                                        ,<span class="attr">list</span>:results&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="newlist-vue"><a href="#newlist-vue" class="headerlink" title="newlist.vue"></a><code>newlist.vue</code></h3> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	currentList.id...</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">watch:&#123;</span><br><span class="line">	computed:&#123;</span><br><span class="line">		...mapGetters([&#x27;currentCatagtory&#x27;,&#x27;currentList&#x27;])</span><br><span class="line">	&#125;,</span><br><span class="line">	watch:&#123;</span><br><span class="line">		currentCatagtory(newValue)&#123;</span><br><span class="line">			this.$store.dispatch(&#x27;newlist/getNewList&#x27;,newvalue)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.yuadh.com">yuadh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.yuadh.com/pages/5e73b2/">https://www.yuadh.com/pages/5e73b2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yuadh.com" target="_blank">圆明园园长</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/pages/2a733f/" title="Vue3.0"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue3.0</div></div></a></div><div class="next-post pull-right"><a href="/pages/3fa5dd/" title="网易云音乐案例"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">网易云音乐案例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/pages/916d34/" title="Vue基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-13</div><div class="title">Vue基础</div></div></a></div><div><a href="/pages/1ba2df/" title="Vue前置知识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-03</div><div class="title">Vue前置知识</div></div></a></div><div><a href="/pages/649bca/" title="webpack"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-15</div><div class="title">webpack</div></div></a></div><div><a href="/pages/4acc55/" title="Vue生命周期"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-27</div><div class="title">Vue生命周期</div></div></a></div><div><a href="/pages/bc8d74/" title="Vue组件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-26</div><div class="title">Vue组件</div></div></a></div><div><a href="/pages/59ff0e/" title="Vue生命周期+"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Vue生命周期+</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yuadh</div><div class="author-info__description">普通上班族</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yuadh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yuadh" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1912546219@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#state"><span class="toc-number">1.1.</span> <span class="toc-text">state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutations"><span class="toc-number">1.2.</span> <span class="toc-text">mutations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#actions"><span class="toc-number">1.3.</span> <span class="toc-text">actions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getters"><span class="toc-number">1.4.</span> <span class="toc-text">getters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">vuex模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">模块化的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">2.2.</span> <span class="toc-text">命名空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#index-js"><span class="toc-number">3.1.</span> <span class="toc-text">index.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#catagtory-js"><span class="toc-number">3.2.</span> <span class="toc-text">catagtory.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#catagtory-vue"><span class="toc-number">3.3.</span> <span class="toc-text">catagtory.vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#newlist-js"><span class="toc-number">3.4.</span> <span class="toc-text">newlist.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#newlist-vue"><span class="toc-number">3.5.</span> <span class="toc-text">newlist.vue</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/%E7%BD%AE%E9%A1%B6%E6%96%87%E7%AB%A0/" title="置顶文章">置顶文章</a><time datetime="2022-11-26T03:41:44.000Z" title="发表于 2022-11-26 11:41:44">2022-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/javascript/30.react/16.ES5%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" title="JS错误处理机制">JS错误处理机制</a><time datetime="2022-10-23T00:55:10.000Z" title="发表于 2022-10-23 08:55:10">2022-10-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/79e7c2/" title="MybatisPlus基础01">MybatisPlus基础01</a><time datetime="2022-10-17T06:25:29.000Z" title="发表于 2022-10-17 14:25:29">2022-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/5bcc4d/" title="20maven模块化">20maven模块化</a><time datetime="2022-10-17T03:26:36.000Z" title="发表于 2022-10-17 11:26:36">2022-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/610f95/" title="SpringBoot快速开始">SpringBoot快速开始</a><time datetime="2022-10-16T09:25:53.000Z" title="发表于 2022-10-16 17:25:53">2022-10-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By yuadh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

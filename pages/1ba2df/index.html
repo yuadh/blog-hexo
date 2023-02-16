@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Vue前置知识 | 圆明园园长</title><meta name="author" content="yuadh"><meta name="copyright" content="yuadh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="vue 前置知识 能够知道如何使用 ES6 的模块化语法 能够知道如何使用 Promise 解决回调地狱的问题 能够知道如何使用 async&#x2F;await 简化 Promise的调用 能够说出什么是EventLoop 能够说出宏任务和微任务的执行顺序  ES6模块化Tip 在 ES6 模块化之前，JavaScript 社区已经尝试并提出 AMD、CMD、CommonJS等模块化规范 但是，这些由社区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue前置知识">
+<meta property="og:url" content="https://www.yuadh.com/pages/1ba2df/index.html">
+<meta property="og:site_name" content="圆明园园长">
+<meta property="og:description" content="vue 前置知识 能够知道如何使用 ES6 的模块化语法 能够知道如何使用 Promise 解决回调地狱的问题 能够知道如何使用 async&#x2F;await 简化 Promise的调用 能够说出什么是EventLoop 能够说出宏任务和微任务的执行顺序  ES6模块化Tip 在 ES6 模块化之前，JavaScript 社区已经尝试并提出 AMD、CMD、CommonJS等模块化规范 但是，这些由社区">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png">
+<meta property="article:published_time" content="2022-02-03T06:34:57.000Z">
+<meta property="article:modified_time" content="2023-02-16T14:04:46.559Z">
+<meta property="article:author" content="yuadh">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.yuadh.com/pages/1ba2df/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vue前置知识',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-16 22:04:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="圆明园园长"><span class="site-name">圆明园园长</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vue前置知识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-03T06:34:57.000Z" title="发表于 2022-02-03 14:34:57">2022-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-16T14:04:46.559Z" title="更新于 2023-02-16 22:04:46">2023-02-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vue前置知识"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="vue-前置知识"><a href="#vue-前置知识" class="headerlink" title="vue 前置知识"></a><code>vue</code> 前置知识</h2><ul>
+<li>能够知道如何使用 <code>ES6</code> 的模块化语法</li>
+<li>能够知道如何使用 <code>Promise</code> 解决回调地狱的问题</li>
+<li>能够知道如何使用 <code>async/await</code> 简化 <code>Promise</code>的调用</li>
+<li>能够说出什么是<code>EventLoop</code></li>
+<li>能够说出宏任务和微任务的执行顺序</li>
+</ul>
+<h2 id="ES6模块化"><a href="#ES6模块化" class="headerlink" title="ES6模块化"></a><code>ES6</code>模块化</h2><p><strong>Tip</strong></p>
+<p>在 <code>ES6</code> 模块化之前，JavaScript 社区已经尝试并提出 <code>AMD、CMD、CommonJS</code>等模块化规范</p>
+<p>但是，这些由社区提供的模块化标准，还是存在一定的差异与局限、并不是所有的浏览器与服务器通用的模块化标准，例如：<code>AMD和CMD</code> 适用于浏览器端，<code>CommonJS</code>适用于服务器端</p>
+<p>因此大一统的 <code>ES6</code> 模块化规范诞生</p>
+<blockquote>
+<p><code>node.js</code> 可以使用 <code>es6</code> 中的模块化 ：<code>package.json</code> 中添加 <code>type:module</code> 节点</p>
+<p>默认情况下 <code>node.js</code> 使用的是 <code>CommonJS</code> 模块化规范</p>
+</blockquote>
+<p><strong><code>ES6</code> 模块化中规范定义</strong></p>
+<ul>
+<li>每个 <code>js</code> 文件都是一个独立的模块</li>
+<li>导入其它模块成员使用 <code>import</code> 关键字</li>
+<li>向外共享模块成员使用 <code>export</code> 关键字</li>
+</ul>
+<p><strong>基本语法</strong></p>
+<ol>
+<li>默认导出与默认导入</li>
+<li>按需导出与按需导入</li>
+<li>直接导入并执行模块中的代码</li>
+</ol>
+<h3 id="默认导出导入"><a href="#默认导出导入" class="headerlink" title="默认导出导入"></a>默认导出导入</h3><p>语法：<code>export default</code>  默认导出成员</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> n2 = <span class="number">20</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">show</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">    n1,</span><br><span class="line">    show</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：默认导出只允许导出一次</p>
+<p>语法：<code>inport</code> 接收名称 <code>from</code> 模块标识符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> data <span class="keyword">from</span> <span class="string">&quot;./demo01.js&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line"><span class="comment">//&#123;n1:10 , show:[Function:show]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="按需导出导入"><a href="#按需导出导入" class="headerlink" title="按需导出导入"></a>按需导出导入</h3><p>导出：<code>export</code> 按需导出的成员</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> dat1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> dat2 = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">show</span>(<span class="params"></span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>导入：<code>import</code> {按需导入接收名称} <code>from</code>  “模块化标识符”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;dat1 <span class="keyword">as</span> data&#125; <span class="keyword">from</span> <span class="string">&quot;./URL&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<ul>
+<li>按需导入的成员名词必须和按需导出的名词一致</li>
+<li>按需导入时，可以使用 as 关键字进行重命名</li>
+<li>按需导入和默认导入可以同时存在，配合使用</li>
+</ul>
+<h3 id="直接导入并执行"><a href="#直接导入并执行" class="headerlink" title="直接导入并执行"></a>直接导入并执行</h3><p>如果只想单纯地执行某个模块中的代码，并不需要得到模块中共享的成员</p>
+<p>此时，可以使用直接导入方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;./URL&quot;</span></span><br><span class="line"><span class="comment">// 0 1 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>多层回调函数的相互嵌套，就形成了回调地狱</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">         <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;3&#x27;</span>);</span><br><span class="line">        &#125;,<span class="number">3000</span>)</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码耦合性强，难以维护</li>
+<li>大量冗余的代码互相嵌套，代码的可读性差</li>
+</ul>
+<p>为了解决回调地狱的问题，<code>ES6</code>新增了 <code>Promise</code> 的概念</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p><code>Promise</code> 是一个构造函数</p>
+<p>我们可以创建 <code>Promise</code> 的实例 <code>const p = new Promise()</code></p>
+<p>new 出来的 <code>Promise</code> 实例对象，代表一个异步操作</p>
+</li>
+<li><p><code>Promise.prototype</code> 上包含一个 <code>.then()</code> 方法</p>
+<p>每一次得到的实例对象，都可以通过原型链的方式访问到 <code>.then()</code>方法</p>
+</li>
+<li><p><code>.then()</code> 方法用来预先指定成功和失败的回调函数</p>
+<p><code>p.then(成功的回调函数，失败的回调函数)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">result</span>=&gt;</span>&#123;&#125;,<span class="function"><span class="params">error</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功的回调函数是必选的，失败回调函数可选</p>
+</li>
+</ul>
+<h3 id="then-fs的案例"><a href="#then-fs的案例" class="headerlink" title="then-fs的案例"></a><code>then-fs</code>的案例</h3><p>使用 <code>node.js</code> 中的 <code>fs</code> 文件操作模块 基于回调函数顺序读取文件内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>,(err1,r1)=&#123;</span><br><span class="line">    <span class="keyword">if</span>(err1)&#123;</span><br><span class="line">        <span class="keyword">return</span> err1.<span class="property">massage</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(r1);</span><br><span class="line">	fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>,(err2,r2)=&#123;</span><br><span class="line">    	<span class="keyword">if</span>(err2)&#123;</span><br><span class="line">        	<span class="keyword">return</span> err2.<span class="property">massage</span></span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(r2);</span><br><span class="line">		fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>,(err3,r3)=&#123;</span><br><span class="line">    		<span class="keyword">if</span>(err3)&#123;</span><br><span class="line">        		<span class="keyword">return</span> err3.<span class="property">massage</span></span><br><span class="line">    		&#125;</span><br><span class="line">    		<span class="variable language_">console</span>.<span class="title function_">log</span>(r3);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此时就会产生地狱回调函数的问题</p>
+<p>调用 <code>then-fs</code> 提供的 <code>readFile()</code> 方法，可以异步读取文件的内容，它的返回值是 <code>Promise</code> 的实例对象。因此可以调用 <code>.then</code>方法为每个 <code>Promise</code> 异步操作指定成功和失败之后的回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thenFs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line">thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r1</span>=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(r1)&#125;,<span class="function"><span class="params">err1</span>=&gt;</span>&#123;<span class="keyword">return</span> err1.<span class="property">message</span>&#125;);</span><br><span class="line"><span class="keyword">import</span> thenFs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line">thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r2</span>=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(r2)&#125;,<span class="function"><span class="params">err2</span>=&gt;</span>&#123;<span class="keyword">return</span> err2.<span class="property">message</span>&#125;);</span><br><span class="line"><span class="keyword">import</span> thenFs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line">thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r3</span>=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(r3)&#125;,<span class="function"><span class="params">err3</span>=&gt;</span>&#123;<span class="keyword">return</span> err3.<span class="property">message</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>但是以上无法保证文件的读取顺序</p>
+<p>利用 <code>Promise</code> 链式调用，解决问题</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL1&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">r1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(r1)</span><br><span class="line">    <span class="keyword">return</span> thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL2&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">r2</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(r2)</span><br><span class="line">    <span class="keyword">return</span> thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL3&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">r3</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(r3)</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err.<span class="property">message</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<p><code>.catch()</code> 方法会捕获到链式调用之前的产生错误异常，不会继续执行后面的链式代码</p>
+<p>如果不想影响到后面的链式代码执行，可以把 <code>.catch()</code> 方法提前</p>
+<h3 id="Promise-All"><a href="#Promise-All" class="headerlink" title="Promise.All()"></a><code>Promise.All()</code></h3><p><code>Promise.All()</code>方法会发起并行的 <code>Promise</code> 异步操作，等所有的异步操作全部结束后才会执行下一步的 <code>.then()</code>操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thenFs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line"><span class="keyword">const</span> promiseArr = [</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL1&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL2&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL3&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">]</span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>(promiseArr).<span class="title function_">then</span>(<span class="function"><span class="params">result</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result)<span class="comment">//1 2 3</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a><code>Promise.race()</code></h3><p><code>Promise.race()</code> 方法会发起并行的 异步操作，只有有任何一个异步操作完成，就立即执行下一步的 <code>.then()</code>操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thenFs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line"><span class="keyword">const</span> promiseArr = [</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL1&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL2&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">    thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;./URL3&#x27;</span>,<span class="string">&#x27;UTF-8&#x27;</span>),</span><br><span class="line">]</span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">race</span>(promiseArr).<span class="title function_">then</span>(<span class="function"><span class="params">result</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result)<span class="comment">//1or2or3</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装自己功能的Promise"><a href="#封装自己功能的Promise" class="headerlink" title="封装自己功能的Promise"></a>封装自己功能的<code>Promise</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fs <span class="keyword">from</span> <span class="string">&#x27;fs&#x27;</span></span><br><span class="line"><span class="comment">//自定义函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getFile</span>(<span class="params">fpath</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve,reject</span>)&#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(fpath,<span class="string">&#x27;utf-8&#x27;</span>,<span class="function">(<span class="params">err,dataStr</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(err)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="title function_">reject</span>(err)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">resolve</span>(dataStr)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getFile</span>(<span class="string">&#x27;./URL&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">r1</span>)=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(r1)&#125;,<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(err)&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<p>在构造 <code>Promise </code> 对象里 function函数的两个形参</p>
+<p>在传递的时候第一个形参是 <code>then()</code> 方法的成功回调函数 ，第二个形参是失败回调函数</p>
+<h3 id="async-和-await"><a href="#async-和-await" class="headerlink" title="async 和 await"></a><code>async</code> 和 <code>await</code></h3><p><code>async/await</code> 是 <code>ES8</code> 引入的新语法，用来简化 <code>promise</code> 异步操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import thenFs from &#x27;&#x27;</span><br><span class="line">async getFile()&#123;</span><br><span class="line">	const r1 = await thenFs.readFile(&#x27;url&#x27;,&#x27;utf8&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>await</code> 被使用的函数必须被 <code>async</code> 修饰</li>
+<li>在 <code>async</code> 函数中，第一个 <code>await</code> 之前的代码同步执行，之后的代码异步执行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> r1 = <span class="keyword">await</span> thenFs.<span class="title function_">readFile</span>(<span class="string">&#x27;url&#x27;</span>,<span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(r1)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">f</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line"><span class="comment">/////out  </span></span><br><span class="line"><span class="comment">//  a b d &#123;r1&#125; c</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a><code>EventLoop</code></h3><p><code>JavaScript</code> 是一门单线程执行的编程语言，同一时间只能做一件事情</p>
+<p>如果前一个任务非常耗时，则后续的任务不得不一直等待，从而导致程序假死问题</p>
+<p><strong>同步任务和异步任务</strong></p>
+<p><strong>同步任务：</strong></p>
+<ul>
+<li>非耗时任务，在主线程上排队执行的任务</li>
+<li>只有前一个任务执行完毕，才能执行后一个任务</li>
+</ul>
+<p><strong>异步任务</strong></p>
+<ul>
+<li>耗时任务，异步任务由 <code>JavaScript</code> 委托给宿主（V8）进行执行</li>
+<li>当异步任务执行完成后，会通知 <code>JavaScript</code> 主线程执行异步任务的回调函数</li>
+</ul>
+<p><img src="https://code.yuadh.com/doc-img/js%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.png"></p>
+<ol>
+<li>同步任务由 <code>js</code> 主线程执行</li>
+<li>异步任务委托给宿主环境执行</li>
+<li>已完成的异步任务对应的回调函数，会被加入到任务队列中等待执行</li>
+<li><code>js</code> 主线程的执行栈被清空后，会读取任务队列中的回调函数，次序执行</li>
+<li>主线程不断重复第四步操作</li>
+</ol>
+<p>整个运行机制称为 <code>EventLoop</code></p>
+<p><strong>示例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">thenFs.<span class="title function_">readFile</span>((<span class="string">&#x27;url&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">s</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;B&#x27;</span>);   </span><br><span class="line">&#125;))</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;C&#x27;</span>);</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;D&#x27;</span>);</span><br><span class="line"><span class="comment">//out - ADCB</span></span><br></pre></td></tr></table></figure>
+
+<p>耗时短的回调和函数先进入任务队列</p>
+<h3 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h3><p><code>js</code> 把异步任务又做了进一步的划分，异步任务又分为</p>
+<ul>
+<li>宏任务（<code>macrotask</code>）<ul>
+<li>异步 Ajax 请求</li>
+<li>setTimeout、setInterval</li>
+<li>文件操作</li>
+<li>其它宏任务</li>
+</ul>
+</li>
+<li>微任务（<code>microtask</code>）<ul>
+<li><code>Promise.then、.catch和.finally</code></li>
+<li><code>process.nextTick</code></li>
+<li>其它微任务</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://code.yuadh.com/doc-img/js%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%BE%AE%E4%BB%BB%E5%8A%A1.png"></p>
+<p>交替执行（微-宏-微…）</p>
+<p><strong>示例</strong></p>
+<p>demo 1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resolve</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line"><span class="comment">//out  - bdca</span></span><br></pre></td></tr></table></figure>
+
+<p>demo 2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="comment">//异步任务</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>)&#123;<span class="comment">//同步任务</span></span><br><span class="line">        consolo.<span class="title function_">log</span>(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">        <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="comment">//异步任务-微任务</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>)&#123;<span class="comment">//同步任务</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;<span class="comment">//异步任务-微任务</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">setTimeout</span> (<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="comment">//异步任务</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;7&#x27;</span>)</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Promise</span> (<span class="keyword">function</span> (<span class="params">resolve</span>)&#123;<span class="comment">//同步任务</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">        <span class="title function_">resolve</span>()</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="comment">//异步任务-微任务</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//out - 1 5 6 2 3 4 7 8 9</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.yuadh.com">yuadh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.yuadh.com/pages/1ba2df/">https://www.yuadh.com/pages/1ba2df/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yuadh.com" target="_blank">圆明园园长</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/pages/34a778/" title="js面向对象2"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">js面向对象2</div></div></a></div><div class="next-post pull-right"><a href="/pages/464a14/" title="git基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">git基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/pages/916d34/" title="Vue基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-13</div><div class="title">Vue基础</div></div></a></div><div><a href="/pages/649bca/" title="webpack"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-15</div><div class="title">webpack</div></div></a></div><div><a href="/pages/4acc55/" title="Vue生命周期"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-27</div><div class="title">Vue生命周期</div></div></a></div><div><a href="/pages/bc8d74/" title="Vue组件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-26</div><div class="title">Vue组件</div></div></a></div><div><a href="/pages/59ff0e/" title="Vue生命周期+"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-02</div><div class="title">Vue生命周期+</div></div></a></div><div><a href="/pages/69a986/" title="Vue插槽"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-04</div><div class="title">Vue插槽</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://img.yuadh.com/imgs/2023/02/16/1676550906134.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yuadh</div><div class="author-info__description">普通上班族</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yuadh"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yuadh" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:1912546219@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">vue 前置知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">ES6模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA%E5%AF%BC%E5%85%A5"><span class="toc-number">2.1.</span> <span class="toc-text">默认导出导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E5%AF%BC%E5%87%BA%E5%AF%BC%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">按需导出导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BC%E5%85%A5%E5%B9%B6%E6%89%A7%E8%A1%8C"><span class="toc-number">2.3.</span> <span class="toc-text">直接导入并执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-number">3.</span> <span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">3.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#then-fs%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="toc-number">3.2.</span> <span class="toc-text">then-fs的案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-All"><span class="toc-number">3.3.</span> <span class="toc-text">Promise.All()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-race"><span class="toc-number">3.4.</span> <span class="toc-text">Promise.race()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E8%87%AA%E5%B7%B1%E5%8A%9F%E8%83%BD%E7%9A%84Promise"><span class="toc-number">3.5.</span> <span class="toc-text">封装自己功能的Promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#async-%E5%92%8C-await"><span class="toc-number">3.6.</span> <span class="toc-text">async 和 await</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EventLoop"><span class="toc-number">3.7.</span> <span class="toc-text">EventLoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.8.</span> <span class="toc-text">宏任务和微任务</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/%E7%BD%AE%E9%A1%B6%E6%96%87%E7%AB%A0/" title="置顶文章">置顶文章</a><time datetime="2022-11-26T03:41:44.000Z" title="发表于 2022-11-26 11:41:44">2022-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/javascript/30.react/16.ES5%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" title="JS错误处理机制">JS错误处理机制</a><time datetime="2022-10-23T00:55:10.000Z" title="发表于 2022-10-23 08:55:10">2022-10-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/79e7c2/" title="MybatisPlus基础01">MybatisPlus基础01</a><time datetime="2022-10-17T06:25:29.000Z" title="发表于 2022-10-17 14:25:29">2022-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/5bcc4d/" title="20maven模块化">20maven模块化</a><time datetime="2022-10-17T03:26:36.000Z" title="发表于 2022-10-17 11:26:36">2022-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/pages/610f95/" title="SpringBoot快速开始">SpringBoot快速开始</a><time datetime="2022-10-16T09:25:53.000Z" title="发表于 2022-10-16 17:25:53">2022-10-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By yuadh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
