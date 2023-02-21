@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 个人博客
-subtitle: MyBlog
-description: yuadh's Blog
+title: 圆明园园长
+subtitle: 
+description: 普通上班族
 keywords: Blog,yuadh,
 author: yuadh
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://www.yuadh.com
+url: https://www.yuadh.com/
 permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: "fluid"
+theme: "butterfly"
 
 
 # Deployment

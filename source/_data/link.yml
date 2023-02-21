@@ -1,0 +1,11 @@
+- class_name: 友情链接
+  class_desc: 本网站的搭建由以下开源作者提供技术支持
+  link_list:
+    - name: Hexo
+      link: https://hexo.io/zh-tw/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      descr: 快速、简单且强大的博客框架
+    - name: Butterfly
+      link: https://butterfly.js.org/
+      avatar: https://camo.githubusercontent.com/cc33313189cc45d475faff9b2c4a9c5d5e4289e48ee333704ba7f105c9d04e95/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f6a65727279633132372f43444e406d322f696d672f7468656d652d627574746572666c792d726561646d652e706e67
+      descr: 美观、功能强大的hexo主题
